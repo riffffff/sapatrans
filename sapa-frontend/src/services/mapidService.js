@@ -8,7 +8,7 @@ const API_BASE_URL = "http://localhost:3000/api";
  */
 export async function fetchSurveyActivities() {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/activities", {
+    const response = await fetch("/api/activities", {
       method: "GET",
       headers: {
         Accept: "application/json",

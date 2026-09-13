@@ -147,7 +147,7 @@ export default function Home({ onPreference, onChat, onOpenMap }) {
         window.searchTimeout = setTimeout(async () => {
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8000/api/search-halte?destination=${encodeURIComponent(value)}&preferences=${encodeURIComponent(activePreferences.join(","))}`
+                    `/api/search-halte?destination=${encodeURIComponent(value)}&preferences=${encodeURIComponent(activePreferences.join(","))}`
                 );
 
                 const result = await response.json();
@@ -160,7 +160,7 @@ export default function Home({ onPreference, onChat, onOpenMap }) {
                 const searchResults = result.data || [];
 
                 const halteResponse = await fetch(
-                    "http://127.0.0.1:8000/api/haltes"
+                    "/api/haltes"
                 );
 
                 const halteResult = await halteResponse.json();
@@ -196,7 +196,7 @@ export default function Home({ onPreference, onChat, onOpenMap }) {
         const restoreSearch = async () => {
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8000/api/search-halte?destination=${encodeURIComponent(savedSearch)}&preferences=${encodeURIComponent(activePreferences.join(","))}`
+                    `/api/search-halte?destination=${encodeURIComponent(savedSearch)}&preferences=${encodeURIComponent(activePreferences.join(","))}`
                 );
 
                 const result = await response.json();
@@ -204,7 +204,7 @@ export default function Home({ onPreference, onChat, onOpenMap }) {
                 if (!result.success) return;
 
                 const halteResponse = await fetch(
-                    "http://127.0.0.1:8000/api/haltes"
+                    "/api/haltes"
                 );
 
                 const halteResult = await halteResponse.json();
@@ -462,7 +462,7 @@ export default function Home({ onPreference, onChat, onOpenMap }) {
                                         className="relative shrink-0 w-[110px] h-[110px] md:w-full md:h-[180px] rounded-[12px] overflow-hidden bg-gray-200 border border-gray-100 shadow-sm"
                                     >
                                         <iframe
-                                            src={`http://127.0.0.1:8000/map?lat=${halte.lat}&long=${halte.long}`}
+                                            src={`/map?lat=${halte.lat}&long=${halte.long}`}
                                             title={halte.halte_ona}
                                             className="absolute inset-0 w-full h-full border-0 pointer-events-none"
                                         />

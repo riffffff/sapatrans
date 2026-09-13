@@ -22,7 +22,7 @@ export default function PetaAksesibilitas({ setActiveTab }) {
   const [loading, setLoading] = useState(true);
 
   const mapApiKey = import.meta.env?.VITE_MAPID_BASEMAP_KEY || '';
-  const mapBackendUrl = 'http://127.0.0.1:8000/map';
+  const mapBackendUrl = '/map';
   const iframeSrc = mapApiKey ? `${mapBackendUrl}?key=${mapApiKey}` : mapBackendUrl;
 
   // Fetch Data dari API Laravel
@@ -30,7 +30,7 @@ export default function PetaAksesibilitas({ setActiveTab }) {
     async function fetchHalte() {
       try {
         setLoading(true);
-        const response = await fetch('http://127.0.0.1:8000/api/haltes');
+        const response = await fetch('/api/haltes');
         const result = await response.json();
 
         if (result.success && result.data.length > 0) {

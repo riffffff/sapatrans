@@ -8,11 +8,11 @@ export default function Dashboard({ setActiveTab }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const mapApiKey = import.meta.env.VITE_MAPID_BASEMAP_KEY;
-  const mapBackendUrl = 'http://127.0.0.1:8000/map';
+  const mapBackendUrl = '/map';
   const iframeSrc = `${mapBackendUrl}?lat=-7.7913247&long=110.3667762${mapApiKey ? `&key=${mapApiKey}` : ''}`;
 
   // URL API Laravel (sesuai route: /api/dashboard)
-  const API_URL = 'http://127.0.0.1:8000/api/dashboard';
+  const API_URL = '/api/dashboard';
 
   useEffect(() => {
     async function fetchDashboardData() {

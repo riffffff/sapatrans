@@ -29,7 +29,7 @@ function MapComponent() {
 
       try {
         // 1. Fetch Data Garis Jalur Bus dari Laravel
-        const resJalur = await fetch("http://127.0.0.1:8000/api/map/jalur");
+        const resJalur = await fetch("/api/map/jalur");
         const dataJalur = await resJalur.json();
 
         map.addSource("jalur-source", {
@@ -49,7 +49,7 @@ function MapComponent() {
         });
 
         // 2. Fetch Data Titik Halte dari Laravel
-        const resHalte = await fetch("http://127.0.0.1:8000/api/map/halte");
+        const resHalte = await fetch("/api/map/halte");
         const dataHalte = await resHalte.json();
 
         map.addSource("halte-source", {

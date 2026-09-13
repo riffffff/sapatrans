@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json([
+        'status' => 'success',
+        'message' => 'SAPA Trans Jogja Backend API is running'
+    ]);
 });
 
 Route::get('/map', function () {

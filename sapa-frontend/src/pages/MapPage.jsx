@@ -261,7 +261,7 @@ export default function MapPage({ onBack, mapAction }) {
 
         try {
             const response = await fetch(
-                `http://127.0.0.1:8000/api/search-halte?destination=${encodeURIComponent(destination)}`
+                `/api/search-halte?destination=${encodeURIComponent(destination)}`
             );
 
             const result = await response.json();
@@ -279,7 +279,7 @@ export default function MapPage({ onBack, mapAction }) {
                     lat: Number(lat),
                     long: Number(long),
                 },
-                "http://127.0.0.1:8000"
+                "*"
             );
         } catch (error) {
             console.error("Gagal mencari lokasi:", error);
@@ -288,7 +288,7 @@ export default function MapPage({ onBack, mapAction }) {
     };
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/haltes")
+        fetch("/api/haltes")
             .then((response) => response.json())
             .then((result) => {
                 console.log("DATA HALTE DATABASE:", result);
@@ -313,13 +313,13 @@ export default function MapPage({ onBack, mapAction }) {
                 type: "FILTER_ACCESSIBILITY",
                 filters: selectedFilters,
             },
-            "http://127.0.0.1:8000"
+            "*"
         );
     }, [selectedFilters]);
 
     useEffect(() => {
         const handleMapMessage = (event) => {
-            if (event.origin !== "http://127.0.0.1:8000") {
+            if (event.origin !== window.location.origin && event.origin !== "http://127.0.0.1:8000" && !event.origin.includes(window.location.hostname)) {
                 return;
             }
 
@@ -546,10 +546,10 @@ export default function MapPage({ onBack, mapAction }) {
                         ref={mapIframeRef}
                         src={
                             mapAction?.center
-                                ? `http://127.0.0.1:8000/map?lat=${mapAction.center[1]}&long=${mapAction.center[0]}&zoom=${mapAction.zoom || 18}`
+                                ? `/map?lat=${mapAction.center[1]}&long=${mapAction.center[0]}&zoom=${mapAction.zoom || 18}`
                                 : userLocation
-                                    ? `http://127.0.0.1:8000/map?lat=${userLocation.lat}&long=${userLocation.long}&zoom=14`
-                                    : "http://127.0.0.1:8000/map"
+                                    ? `/map?lat=${userLocation.lat}&long=${userLocation.long}&zoom=14`
+                                    : "/map"
                         }
                         onLoad={() => {
                             mapIframeRef.current?.contentWindow?.postMessage(
@@ -557,7 +557,7 @@ export default function MapPage({ onBack, mapAction }) {
                                     type: "FILTER_ACCESSIBILITY",
                                     filters: selectedFilters,
                                 },
-                                "http://127.0.0.1:8000"
+                                "*"
                             );
 
                             if (userLocation) {
